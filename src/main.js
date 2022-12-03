@@ -1,6 +1,8 @@
-console.log(data);
-
-
+var db = {
+  radpatho: radpatho,
+  radsci: radsci,
+}
+var data = []
 
 //essentials
 obj = {
@@ -11,9 +13,29 @@ obj = {
     })
     el.textContent= content
   return el
-}
+  }
 }
 
+
+function setup() {
+  console.log(db);
+
+  const topic = document.getElementById("topic");
+  if(db){
+    const topics  = Object.keys(db);
+    topics.map( t => {
+      topic.append( obj.create("option", { value: t }, t) )
+    })
+    data = db[topics[0]]
+    topic.addEventListener("change", (e) => {
+      const val = e.target.value
+      data = db[val]
+      FLASH.shuffled = shuffle(JSON.parse(JSON.stringify(data)));
+      FLASH.items = data.length;
+      READER.list()
+    })
+  }
+}
 
 
 GUI = {
@@ -24,12 +46,12 @@ GUI = {
   set mode(mod){
     mod = mod.getAttribute('title');
     document.getElementById('header').setAttribute('mode',mod);
-    document.getElementById('mode').textContent = `Mode: ${mod}`;
+    //document.getElementById('mode').textContent = `Mode: ${mod}`;
     this[mod.toLowerCase()]()
     this.active = mod
   },
   read(){
-    READER.pdf()
+    READER.list()
   },
   flash(){
     FLASH.init()
@@ -88,7 +110,7 @@ MCQ = {
 
 READER = {
   setToolbar(mode, button){
-    document.getElementById('view-mode').innerHTML = mode;
+    //document.getElementById('view-mode').innerHTML = mode;
     Array.from(document.getElementsByClassName('reader-view')).forEach((item, i) => {
       if(i==button){
         item.setAttribute('active', 'true')
@@ -106,7 +128,7 @@ READER = {
     data.map( v =>{
         var item = obj.create('div', {id:v.index}, v.index)
         item.appendChild(obj.create('h3', {index:v.index}, v.answer))
-        item.appendChild(obj.create('img',{src:v.image, index: v.index, onclick:"GUI.enlarge(this)",title:'Click to Enlarge'}))
+        //item.appendChild(obj.create('img',{src:v.image, index: v.index, onclick:"GUI.enlarge(this)",title:'Click to Enlarge'}))
         v.question.map(q=>{
           item.appendChild(obj.create('p', {index:v.index}, q))
         })
@@ -220,7 +242,7 @@ FLASH = {
     data.question.map( qt => {
       front.appendChild(obj.create('p', { style:'max-width:600px;'}, qt))
     })
-    
+
     if (this.shuffle) {
       document.getElementById('flash-info').innerHTML = "Shuffle: On";
     } else {
@@ -296,6 +318,7 @@ function shuffle(array) {
 window.onload = function(){
 
   //READER.list();
+  setup()
 
   FLASH.shuffled = shuffle(JSON.parse(JSON.stringify(data)));
   FLASH.items = data.length;

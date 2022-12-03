@@ -27,6 +27,8 @@ body{
   font-size: 14px;
   color: var(--font-color);
   position: relative;
+  padding: 2rem 0;
+  margin-bottom: 5rem;
 }
 
 #modal {
@@ -243,10 +245,11 @@ main img {
 }
 
 .pdf img{
-  margin: auto;
+  margin: 0 auto;
 
-  max-width: 750px;
-  max-height: 500px;
+  max-width: 300px;
+  max-height: 300px;
+
 
   width: 100%;
   height: 100%;
@@ -255,7 +258,7 @@ main img {
 .pdf p{
   margin: auto;
   padding: 30px 20px;
-  font-size: 1.1em;
+  font-size: 1.5em;
 
 }
 
@@ -428,4 +431,18 @@ main img {
 /* Style the back side */
 .flash .back {
   transform: rotateX(180deg);
+}
+
+
+
+
+select {
+  background: white;
+  border: 1px solid white;
+  outline: none;
+  --webkit-style: none;
+  -webkit-appearance: none;
+  padding: none;
+  font-size: 1rem;
+
 }
