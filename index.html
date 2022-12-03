@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Abby</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./icons/icon.css">
+
+    <script type="text/javascript" src="src/db.json"></script>
+    <script type="text/javascript" src="src/main.js">
+
+    </script>
+  </head>
+  <body>
+    <header id="header" mode="Read">
+      <div id="mode">
+        Mode: Read
+      </div>
+      <div id="mode-select">
+        <span title="Read" icon="book-open" onclick="GUI.mode=this" button></span>
+        <span title="Flash" icon="docs" onclick="GUI.mode=this" button></span>
+        <span title="MCQ" icon="doc-text" onclick="GUI.mode=this" button></span>
+      </div>
+      <div id="spacer"></div>
+
+      <nav>
+
+
+        <div class="tool read">
+          <span id="view-mode">Grid View</span>
+          <span class="reader-view" icon="list" button onclick="READER.list()"></span>
+          <span class="reader-view" icon="layout" button onclick="READER.grid()"></span>
+          <span class="reader-view" icon="print" button onclick="READER.pdf()"></span>
+        </div>
+
+        <div class="tool fc">
+          <span id="shuffle-state" onclick="FLASH.shuf()"> Shuffle: Off </span>
+        </div>
+
+        <div class="tool">
+          <span onclick="GUI.fontUp()" icon="plus" button></span>
+          Aa
+          <span onclick="GUI.fontDown()" icon="minus" button></span>
+        </div>
+        <div class="tool">
+          <span icon="heart" onclick="alert(randomMessage())"></span>
+
+        </div>
+      </nav>
+    </header>
+
+    <main id="main" style="font-size:14px;"></main>
+    <div id="modal" onclick="GUI.closeModal()" active="false"></div>
+  </body>
+</html>

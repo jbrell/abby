@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<br>
+
+    Input <br>
+    <textarea name="name" rows="8" cols="80" id="input"></textarea>
+    <br>
+
+    <button type="button" name="button" onclick="go()">Go</button>
+
+    <br>
+    output<br>
+    <textarea name="name" rows="8" cols="80" id="output"></textarea>
+    <br>
+
+
+    <script type="text/javascript">
+
+      function go(){
+        var input = document.getElementById("input");
+        var output = document.getElementById("output");
+
+        var text = "" + input.value;
+
+        var parsed = text.split("\n");
+
+        parsed = parsed.map(v=>{
+          return v.trim();
+        }).filter(v=>{
+          return v!="";
+        })
+
+
+        var result = [];
+        var count = 1
+
+        parsed.map(v=>{
+          if(!v.startsWith("•")){
+            result.push({index:count, answer:v, question:[]})
+            count++;
+          }
+          else{
+            v = v.replace("•", "").trim();
+            result[result.length-1].question.push(v)
+          }
+        });
+
+        console.log(result);
+
+        output.value = JSON.stringify(result);
+
+
+
+      }
+
+
+    </script>
+
+  </body>
+</html>
